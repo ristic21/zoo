@@ -33,30 +33,43 @@ const AnimalList = () => {
     const newAnimals = nizZivotinja.filter((animal) => animal.id !== id);
     setNiz(newAnimals);
   };
-  // const result = words.filter(word => word.length > 6);
+
+  const moveAnimals = (animalProp) => {
+    const indexOfAnimalObj = nizZivotinja.indexOf(animalProp);
+
+    const newAnimals = [
+      nizZivotinja[indexOfAnimalObj],
+      ...nizZivotinja.filter((animal) => animal.id !== animalProp.id),
+    ];
+
+    setNiz(newAnimals);
+  };
 
   return (
     <div>
       <h1>Zivotinje:</h1>
       <table className="zivotinjeTable">
         <tbody>
-          {nizZivotinja.map((zivotinja) => (
-            <tr className="zivotinjeTable" key={zivotinja.id}>
-              {" "}
-              <td className="zivotinjeTable">VRSTA: {zivotinja.vrsta} </td>{" "}
-              <td className="zivotinjeTable">IME: {zivotinja.ime} </td>{" "}
+          {nizZivotinja.map((zivotinja, index) => (
+            <tr className="zivotinjeTable" key={index}>
+              <td className="zivotinjeTable">VRSTA:{zivotinja.vrsta}</td>
+              <td className="zivotinjeTable">IME:{zivotinja.ime}</td>
               <td className="zivotinjeTable">
-                DATUM RODJENJA:{" "}
+                DATUM RODJENJA:
                 {zivotinja.datumRodjenja
                   ? zivotinja.datumRodjenja
-                  : "Datum rodjenja nepoznat"}{" "}
+                  : "Datum rodjenja nepoznat"}
               </td>
-              <button key={zivotinja.id} onClick={() => remove(zivotinja.id)}>
+              <td><button onClick={() => remove(zivotinja.id)}>
                 Remove
-              </button>
+              </button></td>
+              <td><button onClick={() => moveAnimals(zivotinja)}>
+                Move to top
+              </button></td>
+              
             </tr>
           ))}
-        </tbody>
+       </tbody>
       </table>
     </div>
   );
