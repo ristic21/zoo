@@ -49,6 +49,7 @@ const AnimalList = () => {
   const [vrsta, setAnimal] = useState('');
   const [ime, setName] = useState('');
   const [datumRodjenja, setBirth] = useState("2014-07-02");
+  const [type, setType] = useState('sisar')
 
 
   const handleSubmit = (e) => {
@@ -59,6 +60,7 @@ const AnimalList = () => {
       vrsta: vrsta,
       ime: ime,
       datumRodjenja: datumRodjenja,
+      type: type,
     });
     setNiz(animals)
 
@@ -104,6 +106,14 @@ const AnimalList = () => {
           />
         </label>
         <br />
+        <select value={type} onChange={(e) => {
+          setType(e.target.value);
+        }}>
+          <option value="sisar">Sisar</option>
+          <option value="riba">Riba</option>
+          <option value="ptica">Ptica</option>
+        </select>
+        <br />
         <button type="submit">Submit</button>
 
       </form>
@@ -130,6 +140,39 @@ const AnimalList = () => {
           ))}
         </tbody>
       </table>
+      <section>
+        <h4>Sisari:</h4>
+        <ul>
+          {nizZivotinja.map((zivotinja) => (zivotinja.type == "sisar" &&
+            <li key={zivotinja.id}>{zivotinja.vrsta} {zivotinja.ime}</li>
+          ))}
+
+        </ul>
+
+      </section>
+
+      <section>
+        <h4>Ribe:</h4>
+        <ul>
+          {nizZivotinja.map((zivotinja) => (zivotinja.type == "riba" &&
+            <li key={zivotinja.id}>{zivotinja.vrsta} {zivotinja.ime}</li>
+          ))}
+
+        </ul>
+
+      </section>
+
+      <section>
+        <h4>Ptice:</h4>
+        <ul>
+          {nizZivotinja.map((zivotinja) => (zivotinja.type == "ptica" &&
+            <li key={zivotinja.id}>{zivotinja.vrsta} {zivotinja.ime}</li>
+          ))}
+
+        </ul>
+
+      </section>
+
     </div>
   );
 };
