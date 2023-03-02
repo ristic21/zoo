@@ -45,10 +45,69 @@ const AnimalList = () => {
     setNiz(newAnimals);
   };
 
+
+  const [vrsta, setAnimal] = useState('');
+  const [ime, setName] = useState('');
+  const [datumRodjenja, setBirth] = useState("2014-07-02");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let animals = nizZivotinja.slice()
+    animals.push({
+      id: nizZivotinja.length + 1,
+      vrsta: vrsta,
+      ime: ime,
+      datumRodjenja: datumRodjenja,
+    });
+    setNiz(animals)
+
+  };
+
+
+
   return (
     <div>
       <h1>Zivotinje:</h1>
-      <table className="zivotinjeTable">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Vrsta:
+          <input
+            type='text'
+            value={vrsta}
+            onChange={(e) => {
+              setAnimal(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          Name:
+          <input
+            type='text'
+            value={ime}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          Age:
+          <input
+            placeholder='Age'
+            type='date'
+            value={datumRodjenja}
+            onChange={(e) => {
+              setBirth(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+
+      </form>
+      <table className="zivotinjeTable App">
         <tbody>
           {nizZivotinja.map((zivotinja, index) => (
             <tr className="zivotinjeTable" key={index}>
@@ -66,10 +125,10 @@ const AnimalList = () => {
               <td><button onClick={() => moveAnimals(zivotinja)}>
                 Move to top
               </button></td>
-              
+
             </tr>
           ))}
-       </tbody>
+        </tbody>
       </table>
     </div>
   );
